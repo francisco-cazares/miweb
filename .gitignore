@@ -1,1 +1,9 @@
 .env
+/miweb.Persistence/bin/Debug
+/miweb.Persistence/obj/Debug
+/miweb.Service/obj/Debug
+/miweb.Domain/bin/Debug
+/miweb.Domain/obj/Debug
+/miweb.Service/bin/Debug
+/miweb.WebApi/bin
+/miweb.WebApi/obj/Debug
