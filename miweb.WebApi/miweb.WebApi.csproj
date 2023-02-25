@@ -175,8 +175,20 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CarroController.cs" />
+    <Compile Include="Controllers\Carro_ProductoController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\Cliente_DireccionController.cs" />
+    <Compile Include="Controllers\DireccionController.cs" />
+    <Compile Include="Controllers\EnvioController.cs" />
+    <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdenController.cs" />
+    <Compile Include="Controllers\Orden_ProductoController.cs" />
+    <Compile Include="Controllers\PagoController.cs" />
+    <Compile Include="Controllers\PaisController.cs" />
+    <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -237,7 +249,19 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Carro\" />
+    <Folder Include="Views\Carro_Producto\" />
+    <Folder Include="Views\Category\" />
+    <Folder Include="Views\Cliente_Direccion\" />
     <Folder Include="Views\Client\" />
+    <Folder Include="Views\Direccion\" />
+    <Folder Include="Views\Envio\" />
+    <Folder Include="Views\Estado\" />
+    <Folder Include="Views\Orden\" />
+    <Folder Include="Views\Orden_Producto\" />
+    <Folder Include="Views\Pago\" />
+    <Folder Include="Views\Pais\" />
+    <Folder Include="Views\Producto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

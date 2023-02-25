@@ -4,57 +4,1059 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ecomerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ecommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Carro">
+          <Key>
+            <PropertyRef Name="CarroId" />
+          </Key>
+          <Property Name="CarroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CliId" Type="int" />
+          <Property Name="DirId" Type="int" />
+          <Property Name="PagoId" Type="int" />
+          <Property Name="EnvId" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Carro_Producto">
+          <Key>
+            <PropertyRef Name="CPid" />
+          </Key>
+          <Property Name="CPid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarroId" Type="int" />
+          <Property Name="Proid" Type="int" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CatId" />
+          </Key>
+          <Property Name="CatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="Imagen" Type="varchar" MaxLength="200" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClienteId" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
-          <Property Name="Telefono" Type="varchar" MaxLength="1" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
           <Property Name="Contrasena" Type="varchar" MaxLength="100" />
           <Property Name="Rol" Type="varchar" MaxLength="50" />
           <Property Name="Activo" Type="bit" />
         </EntityType>
-        <EntityContainer Name="ecomerceModelStoreContainer">
+        <EntityType Name="Cliente_Direccion">
+          <Key>
+            <PropertyRef Name="CDid" />
+          </Key>
+          <Property Name="CDid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CliId" Type="int" />
+          <Property Name="DirId" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="Dirid" />
+          </Key>
+          <Property Name="Dirid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="calle" Type="varchar" MaxLength="100" />
+          <Property Name="numero" Type="int" />
+          <Property Name="colonia" Type="varchar" MaxLength="100" />
+          <Property Name="cp" Type="int" />
+          <Property Name="EstadoId" Type="int" />
+          <Property Name="entre_calles" Type="varchar" MaxLength="50" />
+          <Property Name="referencias" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Envio">
+          <Key>
+            <PropertyRef Name="EnvId" />
+          </Key>
+          <Property Name="EnvId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Imagen" Type="varchar" MaxLength="200" />
+          <Property Name="Costo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="EstId" />
+          </Key>
+          <Property Name="EstId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="PaisID" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="Ordid" />
+          </Key>
+          <Property Name="Ordid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" />
+          <Property Name="DirId" Type="int" />
+          <Property Name="PagoId" Type="int" />
+          <Property Name="EnvId" Type="int" />
+          <Property Name="total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Orden_Producto">
+          <Key>
+            <PropertyRef Name="OPid" />
+          </Key>
+          <Property Name="OPid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrdId" Type="int" />
+          <Property Name="Proid" Type="int" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="20" />
+          <Property Name="Imagen" Type="varchar" MaxLength="200" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="paisID" />
+          </Key>
+          <Property Name="paisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Proid" />
+          </Key>
+          <Property Name="Proid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="marca" Type="varchar" MaxLength="50" />
+          <Property Name="sku" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="imagen" Type="varchar" MaxLength="50" />
+          <Property Name="precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CatId" Type="int" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Carro__CliId__4F47C5E3">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="CliId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro__DirId__503BEA1C">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Dirid" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="DirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro__EnvId__5224328E">
+          <End Role="Envio" Type="Self.Envio" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="EnvId" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="EnvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro__PagoId__51300E55">
+          <End Role="Pago" Type="Self.Pago" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pago">
+              <PropertyRef Name="PagoId" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="PagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro_Pro__Carro__55009F39">
+          <End Role="Carro" Type="Self.Carro" Multiplicity="0..1" />
+          <End Role="Carro_Producto" Type="Self.Carro_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carro">
+              <PropertyRef Name="CarroId" />
+            </Principal>
+            <Dependent Role="Carro_Producto">
+              <PropertyRef Name="CarroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro_Pro__Proid__55F4C372">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Carro_Producto" Type="Self.Carro_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Proid" />
+            </Principal>
+            <Dependent Role="Carro_Producto">
+              <PropertyRef Name="Proid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_D__CliId__5E8A0973">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cliente_Direccion" Type="Self.Cliente_Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Cliente_Direccion">
+              <PropertyRef Name="CliId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_D__DirId__5F7E2DAC">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Cliente_Direccion" Type="Self.Cliente_Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Dirid" />
+            </Principal>
+            <Dependent Role="Cliente_Direccion">
+              <PropertyRef Name="DirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__Estad__3587F3E0">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstId" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estado__PaisID__32AB8735">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="paisID" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__ClienteId__58D1301D">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__DirId__59C55456">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Dirid" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="DirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__EnvId__5BAD9CC8">
+          <End Role="Envio" Type="Self.Envio" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="EnvId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="EnvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__PagoId__5AB9788F">
+          <End Role="Pago" Type="Self.Pago" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pago">
+              <PropertyRef Name="PagoId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="PagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden_Pro__OrdId__65370702">
+          <End Role="Orden" Type="Self.Orden" Multiplicity="0..1" />
+          <End Role="Orden_Producto" Type="Self.Orden_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden">
+              <PropertyRef Name="Ordid" />
+            </Principal>
+            <Dependent Role="Orden_Producto">
+              <PropertyRef Name="OrdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden_Pro__Proid__662B2B3B">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Orden_Producto" Type="Self.Orden_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Proid" />
+            </Principal>
+            <Dependent Role="Orden_Producto">
+              <PropertyRef Name="Proid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__CatId__42E1EEFE">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CatId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ecommerceModelStoreContainer">
+          <EntitySet Name="Carro" EntityType="Self.Carro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carro_Producto" EntityType="Self.Carro_Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente_Direccion" EntityType="Self.Cliente_Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Envio" EntityType="Self.Envio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orden" EntityType="Self.Orden" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orden_Producto" EntityType="Self.Orden_Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Carro__CliId__4F47C5E3" Association="Self.FK__Carro__CliId__4F47C5E3">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro__DirId__503BEA1C" Association="Self.FK__Carro__DirId__503BEA1C">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro__EnvId__5224328E" Association="Self.FK__Carro__EnvId__5224328E">
+            <End Role="Envio" EntitySet="Envio" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro__PagoId__51300E55" Association="Self.FK__Carro__PagoId__51300E55">
+            <End Role="Pago" EntitySet="Pago" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro_Pro__Carro__55009F39" Association="Self.FK__Carro_Pro__Carro__55009F39">
+            <End Role="Carro" EntitySet="Carro" />
+            <End Role="Carro_Producto" EntitySet="Carro_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro_Pro__Proid__55F4C372" Association="Self.FK__Carro_Pro__Proid__55F4C372">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Carro_Producto" EntitySet="Carro_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_D__CliId__5E8A0973" Association="Self.FK__Cliente_D__CliId__5E8A0973">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cliente_Direccion" EntitySet="Cliente_Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_D__DirId__5F7E2DAC" Association="Self.FK__Cliente_D__DirId__5F7E2DAC">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Cliente_Direccion" EntitySet="Cliente_Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__Estad__3587F3E0" Association="Self.FK__Direccion__Estad__3587F3E0">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estado__PaisID__32AB8735" Association="Self.FK__Estado__PaisID__32AB8735">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Estado" EntitySet="Estado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__ClienteId__58D1301D" Association="Self.FK__Orden__ClienteId__58D1301D">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__DirId__59C55456" Association="Self.FK__Orden__DirId__59C55456">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__EnvId__5BAD9CC8" Association="Self.FK__Orden__EnvId__5BAD9CC8">
+            <End Role="Envio" EntitySet="Envio" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__PagoId__5AB9788F" Association="Self.FK__Orden__PagoId__5AB9788F">
+            <End Role="Pago" EntitySet="Pago" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden_Pro__OrdId__65370702" Association="Self.FK__Orden_Pro__OrdId__65370702">
+            <End Role="Orden" EntitySet="Orden" />
+            <End Role="Orden_Producto" EntitySet="Orden_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden_Pro__Proid__662B2B3B" Association="Self.FK__Orden_Pro__Proid__662B2B3B">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Orden_Producto" EntitySet="Orden_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__CatId__42E1EEFE" Association="Self.FK__Producto__CatId__42E1EEFE">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ecomerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ecomerceEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cliente" EntityType="ecomerceModel.Cliente" />
-        </EntityContainer>
+      <Schema Namespace="ecommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Carro">
+          <Key>
+            <PropertyRef Name="CarroId" />
+          </Key>
+          <Property Name="CarroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CliId" Type="Int32" />
+          <Property Name="DirId" Type="Int32" />
+          <Property Name="PagoId" Type="Int32" />
+          <Property Name="EnvId" Type="Int32" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Carro__CliId__4F47C5E3" FromRole="Carro" ToRole="Cliente" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Carro__DirId__503BEA1C" FromRole="Carro" ToRole="Direccion" />
+          <NavigationProperty Name="Envio" Relationship="Self.FK__Carro__EnvId__5224328E" FromRole="Carro" ToRole="Envio" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK__Carro__PagoId__51300E55" FromRole="Carro" ToRole="Pago" />
+          <NavigationProperty Name="Carro_Producto" Relationship="Self.FK__Carro_Pro__Carro__55009F39" FromRole="Carro" ToRole="Carro_Producto" />
+        </EntityType>
+        <EntityType Name="Carro_Producto">
+          <Key>
+            <PropertyRef Name="CPid" />
+          </Key>
+          <Property Name="CPid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarroId" Type="Int32" />
+          <Property Name="Proid" Type="Int32" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Carro" Relationship="Self.FK__Carro_Pro__Carro__55009F39" FromRole="Carro_Producto" ToRole="Carro" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__Carro_Pro__Proid__55F4C372" FromRole="Carro_Producto" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="CatId" />
+          </Key>
+          <Property Name="CatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__Producto__CatId__42E1EEFE" FromRole="Categoria" ToRole="Producto" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="ClienteId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Contrasena" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Carro" Relationship="Self.FK__Carro__CliId__4F47C5E3" FromRole="Cliente" ToRole="Carro" />
+          <NavigationProperty Name="Cliente_Direccion" Relationship="Self.FK__Cliente_D__CliId__5E8A0973" FromRole="Cliente" ToRole="Cliente_Direccion" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK__Orden__ClienteId__58D1301D" FromRole="Cliente" ToRole="Orden" />
         </EntityType>
+        <EntityType Name="Cliente_Direccion">
+          <Key>
+            <PropertyRef Name="CDid" />
+          </Key>
+          <Property Name="CDid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CliId" Type="Int32" />
+          <Property Name="DirId" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Cliente_D__CliId__5E8A0973" FromRole="Cliente_Direccion" ToRole="Cliente" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Cliente_D__DirId__5F7E2DAC" FromRole="Cliente_Direccion" ToRole="Direccion" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="Dirid" />
+          </Key>
+          <Property Name="Dirid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="numero" Type="Int32" />
+          <Property Name="colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cp" Type="Int32" />
+          <Property Name="EstadoId" Type="Int32" />
+          <Property Name="entre_calles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="referencias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Carro" Relationship="Self.FK__Carro__DirId__503BEA1C" FromRole="Direccion" ToRole="Carro" />
+          <NavigationProperty Name="Cliente_Direccion" Relationship="Self.FK__Cliente_D__DirId__5F7E2DAC" FromRole="Direccion" ToRole="Cliente_Direccion" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK__Direccion__Estad__3587F3E0" FromRole="Direccion" ToRole="Estado" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK__Orden__DirId__59C55456" FromRole="Direccion" ToRole="Orden" />
+        </EntityType>
+        <EntityType Name="Envio">
+          <Key>
+            <PropertyRef Name="EnvId" />
+          </Key>
+          <Property Name="EnvId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Costo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Carro" Relationship="Self.FK__Carro__EnvId__5224328E" FromRole="Envio" ToRole="Carro" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK__Orden__EnvId__5BAD9CC8" FromRole="Envio" ToRole="Orden" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="EstId" />
+          </Key>
+          <Property Name="EstId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaisID" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Direccion__Estad__3587F3E0" FromRole="Estado" ToRole="Direccion" />
+          <NavigationProperty Name="Pais" Relationship="Self.FK__Estado__PaisID__32AB8735" FromRole="Estado" ToRole="Pais" />
+        </EntityType>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="Ordid" />
+          </Key>
+          <Property Name="Ordid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" />
+          <Property Name="DirId" Type="Int32" />
+          <Property Name="PagoId" Type="Int32" />
+          <Property Name="EnvId" Type="Int32" />
+          <Property Name="total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Orden__ClienteId__58D1301D" FromRole="Orden" ToRole="Cliente" />
+          <NavigationProperty Name="Direccion" Relationship="Self.FK__Orden__DirId__59C55456" FromRole="Orden" ToRole="Direccion" />
+          <NavigationProperty Name="Envio" Relationship="Self.FK__Orden__EnvId__5BAD9CC8" FromRole="Orden" ToRole="Envio" />
+          <NavigationProperty Name="Pago" Relationship="Self.FK__Orden__PagoId__5AB9788F" FromRole="Orden" ToRole="Pago" />
+          <NavigationProperty Name="Orden_Producto" Relationship="Self.FK__Orden_Pro__OrdId__65370702" FromRole="Orden" ToRole="Orden_Producto" />
+        </EntityType>
+        <EntityType Name="Orden_Producto">
+          <Key>
+            <PropertyRef Name="OPid" />
+          </Key>
+          <Property Name="OPid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrdId" Type="Int32" />
+          <Property Name="Proid" Type="Int32" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK__Orden_Pro__OrdId__65370702" FromRole="Orden_Producto" ToRole="Orden" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK__Orden_Pro__Proid__662B2B3B" FromRole="Orden_Producto" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Pago">
+          <Key>
+            <PropertyRef Name="PagoId" />
+          </Key>
+          <Property Name="PagoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Carro" Relationship="Self.FK__Carro__PagoId__51300E55" FromRole="Pago" ToRole="Carro" />
+          <NavigationProperty Name="Orden" Relationship="Self.FK__Orden__PagoId__5AB9788F" FromRole="Pago" ToRole="Orden" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="paisID" />
+          </Key>
+          <Property Name="paisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK__Estado__PaisID__32AB8735" FromRole="Pais" ToRole="Estado" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Proid" />
+          </Key>
+          <Property Name="Proid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sku" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="imagen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CatId" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Carro_Producto" Relationship="Self.FK__Carro_Pro__Proid__55F4C372" FromRole="Producto" ToRole="Carro_Producto" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK__Producto__CatId__42E1EEFE" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="Orden_Producto" Relationship="Self.FK__Orden_Pro__Proid__662B2B3B" FromRole="Producto" ToRole="Orden_Producto" />
+        </EntityType>
+        <Association Name="FK__Carro__CliId__4F47C5E3">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="CliId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro__DirId__503BEA1C">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Dirid" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="DirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro__EnvId__5224328E">
+          <End Role="Envio" Type="Self.Envio" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="EnvId" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="EnvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro__PagoId__51300E55">
+          <End Role="Pago" Type="Self.Pago" Multiplicity="0..1" />
+          <End Role="Carro" Type="Self.Carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pago">
+              <PropertyRef Name="PagoId" />
+            </Principal>
+            <Dependent Role="Carro">
+              <PropertyRef Name="PagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro_Pro__Carro__55009F39">
+          <End Role="Carro" Type="Self.Carro" Multiplicity="0..1" />
+          <End Role="Carro_Producto" Type="Self.Carro_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carro">
+              <PropertyRef Name="CarroId" />
+            </Principal>
+            <Dependent Role="Carro_Producto">
+              <PropertyRef Name="CarroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carro_Pro__Proid__55F4C372">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Carro_Producto" Type="Self.Carro_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Proid" />
+            </Principal>
+            <Dependent Role="Carro_Producto">
+              <PropertyRef Name="Proid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Producto__CatId__42E1EEFE">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CatId" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="CatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_D__CliId__5E8A0973">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Cliente_Direccion" Type="Self.Cliente_Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Cliente_Direccion">
+              <PropertyRef Name="CliId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__ClienteId__58D1301D">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cliente_D__DirId__5F7E2DAC">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Cliente_Direccion" Type="Self.Cliente_Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Dirid" />
+            </Principal>
+            <Dependent Role="Cliente_Direccion">
+              <PropertyRef Name="DirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Direccion__Estad__3587F3E0">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="0..1" />
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="EstId" />
+            </Principal>
+            <Dependent Role="Direccion">
+              <PropertyRef Name="EstadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__DirId__59C55456">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="Dirid" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="DirId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__EnvId__5BAD9CC8">
+          <End Role="Envio" Type="Self.Envio" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Envio">
+              <PropertyRef Name="EnvId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="EnvId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estado__PaisID__32AB8735">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Estado" Type="Self.Estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="paisID" />
+            </Principal>
+            <Dependent Role="Estado">
+              <PropertyRef Name="PaisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden__PagoId__5AB9788F">
+          <End Role="Pago" Type="Self.Pago" Multiplicity="0..1" />
+          <End Role="Orden" Type="Self.Orden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pago">
+              <PropertyRef Name="PagoId" />
+            </Principal>
+            <Dependent Role="Orden">
+              <PropertyRef Name="PagoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden_Pro__OrdId__65370702">
+          <End Role="Orden" Type="Self.Orden" Multiplicity="0..1" />
+          <End Role="Orden_Producto" Type="Self.Orden_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden">
+              <PropertyRef Name="Ordid" />
+            </Principal>
+            <Dependent Role="Orden_Producto">
+              <PropertyRef Name="OrdId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orden_Pro__Proid__662B2B3B">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="Orden_Producto" Type="Self.Orden_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Proid" />
+            </Principal>
+            <Dependent Role="Orden_Producto">
+              <PropertyRef Name="Proid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ecommerceEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carro" EntityType="Self.Carro" />
+          <EntitySet Name="Carro_Producto" EntityType="Self.Carro_Producto" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Cliente_Direccion" EntityType="Self.Cliente_Direccion" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+          <EntitySet Name="Envio" EntityType="Self.Envio" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" />
+          <EntitySet Name="Orden" EntityType="Self.Orden" />
+          <EntitySet Name="Orden_Producto" EntityType="Self.Orden_Producto" />
+          <EntitySet Name="Pago" EntityType="Self.Pago" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <AssociationSet Name="FK__Carro__CliId__4F47C5E3" Association="Self.FK__Carro__CliId__4F47C5E3">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro__DirId__503BEA1C" Association="Self.FK__Carro__DirId__503BEA1C">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro__EnvId__5224328E" Association="Self.FK__Carro__EnvId__5224328E">
+            <End Role="Envio" EntitySet="Envio" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro__PagoId__51300E55" Association="Self.FK__Carro__PagoId__51300E55">
+            <End Role="Pago" EntitySet="Pago" />
+            <End Role="Carro" EntitySet="Carro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro_Pro__Carro__55009F39" Association="Self.FK__Carro_Pro__Carro__55009F39">
+            <End Role="Carro" EntitySet="Carro" />
+            <End Role="Carro_Producto" EntitySet="Carro_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carro_Pro__Proid__55F4C372" Association="Self.FK__Carro_Pro__Proid__55F4C372">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Carro_Producto" EntitySet="Carro_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Producto__CatId__42E1EEFE" Association="Self.FK__Producto__CatId__42E1EEFE">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_D__CliId__5E8A0973" Association="Self.FK__Cliente_D__CliId__5E8A0973">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cliente_Direccion" EntitySet="Cliente_Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__ClienteId__58D1301D" Association="Self.FK__Orden__ClienteId__58D1301D">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cliente_D__DirId__5F7E2DAC" Association="Self.FK__Cliente_D__DirId__5F7E2DAC">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Cliente_Direccion" EntitySet="Cliente_Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Direccion__Estad__3587F3E0" Association="Self.FK__Direccion__Estad__3587F3E0">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Direccion" EntitySet="Direccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__DirId__59C55456" Association="Self.FK__Orden__DirId__59C55456">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__EnvId__5BAD9CC8" Association="Self.FK__Orden__EnvId__5BAD9CC8">
+            <End Role="Envio" EntitySet="Envio" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estado__PaisID__32AB8735" Association="Self.FK__Estado__PaisID__32AB8735">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Estado" EntitySet="Estado" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden__PagoId__5AB9788F" Association="Self.FK__Orden__PagoId__5AB9788F">
+            <End Role="Pago" EntitySet="Pago" />
+            <End Role="Orden" EntitySet="Orden" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden_Pro__OrdId__65370702" Association="Self.FK__Orden_Pro__OrdId__65370702">
+            <End Role="Orden" EntitySet="Orden" />
+            <End Role="Orden_Producto" EntitySet="Orden_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orden_Pro__Proid__662B2B3B" Association="Self.FK__Orden_Pro__Proid__662B2B3B">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Orden_Producto" EntitySet="Orden_Producto" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ecomerceModelStoreContainer" CdmEntityContainer="ecomerceEntities2">
-          <EntitySetMapping Name="Cliente">
-            <EntityTypeMapping TypeName="ecomerceModel.Cliente">
-              <MappingFragment StoreEntitySet="Cliente">
+        <EntityContainerMapping StorageEntityContainer="ecommerceModelStoreContainer" CdmEntityContainer="ecommerceEntities1">
+          <EntitySetMapping Name="Carro">
+            <EntityTypeMapping TypeName="ecommerceModel.Carro">
+              <MappingFragment StoreEntitySet="Carro">
+                <ScalarProperty Name="CarroId" ColumnName="CarroId" />
+                <ScalarProperty Name="CliId" ColumnName="CliId" />
+                <ScalarProperty Name="DirId" ColumnName="DirId" />
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+                <ScalarProperty Name="EnvId" ColumnName="EnvId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Rol" ColumnName="Rol" />
-                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carro_Producto">
+            <EntityTypeMapping TypeName="ecommerceModel.Carro_Producto">
+              <MappingFragment StoreEntitySet="Carro_Producto">
+                <ScalarProperty Name="CPid" ColumnName="CPid" />
+                <ScalarProperty Name="CarroId" ColumnName="CarroId" />
+                <ScalarProperty Name="Proid" ColumnName="Proid" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="ecommerceModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="ecommerceModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente_Direccion">
+            <EntityTypeMapping TypeName="ecommerceModel.Cliente_Direccion">
+              <MappingFragment StoreEntitySet="Cliente_Direccion">
+                <ScalarProperty Name="CDid" ColumnName="CDid" />
+                <ScalarProperty Name="CliId" ColumnName="CliId" />
+                <ScalarProperty Name="DirId" ColumnName="DirId" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="ecommerceModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="Dirid" ColumnName="Dirid" />
+                <ScalarProperty Name="calle" ColumnName="calle" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="colonia" ColumnName="colonia" />
+                <ScalarProperty Name="cp" ColumnName="cp" />
+                <ScalarProperty Name="EstadoId" ColumnName="EstadoId" />
+                <ScalarProperty Name="entre_calles" ColumnName="entre_calles" />
+                <ScalarProperty Name="referencias" ColumnName="referencias" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Envio">
+            <EntityTypeMapping TypeName="ecommerceModel.Envio">
+              <MappingFragment StoreEntitySet="Envio">
+                <ScalarProperty Name="EnvId" ColumnName="EnvId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="ecommerceModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="EstId" ColumnName="EstId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="PaisID" ColumnName="PaisID" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orden">
+            <EntityTypeMapping TypeName="ecommerceModel.Orden">
+              <MappingFragment StoreEntitySet="Orden">
+                <ScalarProperty Name="Ordid" ColumnName="Ordid" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="DirId" ColumnName="DirId" />
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+                <ScalarProperty Name="EnvId" ColumnName="EnvId" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orden_Producto">
+            <EntityTypeMapping TypeName="ecommerceModel.Orden_Producto">
+              <MappingFragment StoreEntitySet="Orden_Producto">
+                <ScalarProperty Name="OPid" ColumnName="OPid" />
+                <ScalarProperty Name="OrdId" ColumnName="OrdId" />
+                <ScalarProperty Name="Proid" ColumnName="Proid" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pago">
+            <EntityTypeMapping TypeName="ecommerceModel.Pago">
+              <MappingFragment StoreEntitySet="Pago">
+                <ScalarProperty Name="PagoId" ColumnName="PagoId" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="ecommerceModel.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="paisID" ColumnName="paisID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="ecommerceModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Proid" ColumnName="Proid" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="sku" ColumnName="sku" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="CatId" ColumnName="CatId" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

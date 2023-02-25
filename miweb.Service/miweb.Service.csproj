@@ -51,7 +51,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarroService.cs" />
+    <Compile Include="Carro_ProductoService.cs" />
+    <Compile Include="CategoryService.cs" />
+    <Compile Include="Cliente_DireccionService.cs" />
     <Compile Include="ClientService.cs" />
+    <Compile Include="DireccionService.cs" />
+    <Compile Include="EnvioService.cs" />
+    <Compile Include="EstadoService.cs" />
+    <Compile Include="OrdenService.cs" />
+    <Compile Include="Orden_ProductoService.cs" />
+    <Compile Include="PagoService.cs" />
+    <Compile Include="PaisService.cs" />
+    <Compile Include="ProductoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +72,7 @@
       <Name>miweb.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\miweb.Persistence\miweb.Persistence.csproj">
-      <Project>{5366F388-F3E9-42A0-A0AA-6B8D41B817FB}</Project>
+      <Project>{5366f388-f3e9-42a0-a0aa-6b8d41b817fb}</Project>
       <Name>miweb.Persistence</Name>
     </ProjectReference>
   </ItemGroup>

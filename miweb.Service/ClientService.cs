@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 
+
+
 namespace miweb.Service
 {
     public class ClientService : IClientService
@@ -12,13 +14,13 @@ namespace miweb.Service
         public List<ClientViewModel> GetListClient()
         {
     
-            using (var context = new ecomerceEntities2())
+            using (var context = new ecommerceEntities1())
             {
 
                List<ClientViewModel> lista = (from _cli in context.Cliente where _cli.Activo == true
                          select new ClientViewModel
                          {
-                             Id = _cli.Id,
+                             ClienteId = _cli.ClienteId,
                              Nombre = _cli.Nombre,
                              Contrasena = _cli.Contrasena,
                              Email = _cli.Email,

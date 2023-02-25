@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\miweb.Domain",
+    "\\miweb.Domain\\Model",
+    "\\miweb.Persistence",
+    "\\miweb.Persistence\\dataBase",
+    "\\miweb.Service",
+    "\\miweb.WebApi",
+    "\\miweb.WebApi\\Controllers"
+  ],
+  "SelectedNode": "\\miweb.Persistence\\dataBase",
+  "PreviewInSolutionExplorer": false
+}

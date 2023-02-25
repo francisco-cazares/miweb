@@ -14,12 +14,27 @@ namespace miweb.Persistence.dataBase
     
     public partial class Cliente
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cliente()
+        {
+            this.Carro = new HashSet<Carro>();
+            this.Cliente_Direccion = new HashSet<Cliente_Direccion>();
+            this.Orden = new HashSet<Orden>();
+        }
+    
+        public int ClienteId { get; set; }
         public string Nombre { get; set; }
         public string Email { get; set; }
         public string Telefono { get; set; }
         public string Contrasena { get; set; }
         public string Rol { get; set; }
         public Nullable<bool> Activo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carro> Carro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente_Direccion> Cliente_Direccion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orden> Orden { get; set; }
     }
 }

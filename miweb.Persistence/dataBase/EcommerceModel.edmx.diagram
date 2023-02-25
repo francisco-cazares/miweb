@@ -4,8 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eb1e4b721798447d957752fdeac0771c" Name="Diagram1">
-        <EntityTypeShape EntityType="ecomerceModel.Cliente" Width="1.5" PointX="0.75" PointY="0.75" />
+      <Diagram DiagramId="d8c233b4b52a43bf944511132058d8f8" Name="Diagram1">
+        <EntityTypeShape EntityType="ecommerceModel.Carro" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Carro_Producto" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Categoria" Width="1.5" PointX="3.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Cliente" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Cliente_Direccion" Width="1.5" PointX="6" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Direccion" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Envio" Width="1.5" PointX="3.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Estado" Width="1.5" PointX="1.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Orden" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Orden_Producto" Width="1.5" PointX="8.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Pago" Width="1.5" PointX="3.75" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Pais" Width="1.5" PointX="1.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecommerceModel.Producto" Width="1.5" PointX="6" PointY="20.875" IsExpanded="true" />
+        <AssociationConnector Association="ecommerceModel.FK__Carro__CliId__4F47C5E3" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Carro__DirId__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Carro__EnvId__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Carro__PagoId__51300E55" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Carro_Pro__Carro__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Carro_Pro__Proid__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Producto__CatId__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Cliente_D__CliId__5E8A0973" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Orden__ClienteId__58D1301D" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Cliente_D__DirId__5F7E2DAC" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Direccion__Estad__3587F3E0" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Orden__DirId__59C55456" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Orden__EnvId__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Estado__PaisID__32AB8735" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Orden__PagoId__5AB9788F" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Orden_Pro__OrdId__65370702" ManuallyRouted="false" />
+        <AssociationConnector Association="ecommerceModel.FK__Orden_Pro__Proid__662B2B3B" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

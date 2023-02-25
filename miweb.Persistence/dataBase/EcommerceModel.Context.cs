@@ -13,10 +13,10 @@ namespace miweb.Persistence.dataBase
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ecomerceEntities2 : DbContext
+    public partial class ecommerceEntities1 : DbContext
     {
-        public ecomerceEntities2()
-            : base("name=ecomerceEntities2")
+        public ecommerceEntities1()
+            : base("name=ecommerceEntities1")
         {
         }
     
@@ -25,6 +25,18 @@ namespace miweb.Persistence.dataBase
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Carro> Carro { get; set; }
+        public virtual DbSet<Carro_Producto> Carro_Producto { get; set; }
+        public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Cliente_Direccion> Cliente_Direccion { get; set; }
+        public virtual DbSet<Direccion> Direccion { get; set; }
+        public virtual DbSet<Envio> Envio { get; set; }
+        public virtual DbSet<Estado> Estado { get; set; }
+        public virtual DbSet<Orden> Orden { get; set; }
+        public virtual DbSet<Orden_Producto> Orden_Producto { get; set; }
+        public virtual DbSet<Pago> Pago { get; set; }
+        public virtual DbSet<Pais> Pais { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
     }
 }

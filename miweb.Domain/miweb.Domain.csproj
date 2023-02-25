@@ -42,11 +42,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Model\CarroViewModel.cs" />
+    <Compile Include="Model\Carro_ProductoViewModel.cs" />
+    <Compile Include="Model\Cliente_DireccionViewModel.cs" />
     <Compile Include="Model\ClientViewModel.cs" />
+    <Compile Include="Model\DireccionViewModel.cs" />
+    <Compile Include="Model\EnvioViewModel.cs" />
+    <Compile Include="Model\EstadoViewModel.cs" />
+    <Compile Include="Model\OrdenViewModel.cs" />
+    <Compile Include="Model\Orden_ProductoViewModel.cs" />
+    <Compile Include="Model\PagoViewModel.cs" />
+    <Compile Include="Model\PaisViewModel.cs" />
+    <Compile Include="Model\ProductoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dto\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\CategoryViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

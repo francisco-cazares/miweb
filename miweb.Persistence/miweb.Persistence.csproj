@@ -51,7 +51,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="dataBase\Carro.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Carro_Producto.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Categoria.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="dataBase\Cliente.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Cliente_Direccion.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Direccion.cs">
       <DependentUpon>EcommerceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="dataBase\EcommerceModel.Context.cs">
@@ -69,6 +84,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EcommerceModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="dataBase\Envio.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Estado.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Orden.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Orden_Producto.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Pago.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Pais.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dataBase\Producto.cs">
+      <DependentUpon>EcommerceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,7 +121,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="dataBase\EcommerceModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
