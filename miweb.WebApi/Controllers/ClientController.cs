@@ -1,4 +1,5 @@
-﻿using miweb.Service;
+﻿using miweb.Domain.Dto;
+using miweb.Service;
 using System;
 using System.Web.Mvc;
 
@@ -20,6 +21,19 @@ namespace miweb.WebApi.Controllers
                 var result = _clientService.GetListClient();
 
                 return Json(result,JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult CreateCliente(ClienteDto clienteDto)
+        {
+            try
+            {
+                var result = _clientService.Create(clienteDto);
+                return Json(result);
             }
             catch (Exception ex)
             {

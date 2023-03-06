@@ -297,6 +297,10 @@
       <Project>{AC95F2B0-ED9B-43E4-8394-ACE5A12D21DD}</Project>
       <Name>miweb.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\miweb.Persistence\miweb.Persistence.csproj">
+      <Project>{5366F388-F3E9-42A0-A0AA-6B8D41B817FB}</Project>
+      <Name>miweb.Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\miweb.Service\miweb.Service.csproj">
       <Project>{8A333BC2-75FE-492C-918E-288C7138E6EA}</Project>
       <Name>miweb.Service</Name>

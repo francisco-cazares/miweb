@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Dto\CarroDto.cs" />
+    <Compile Include="Dto\ClienteDto.cs" />
+    <Compile Include="Dto\PaisDto.cs" />
     <Compile Include="Model\CarroViewModel.cs" />
     <Compile Include="Model\Carro_ProductoViewModel.cs" />
     <Compile Include="Model\Cliente_DireccionViewModel.cs" />
@@ -56,9 +59,7 @@
     <Compile Include="Model\ProductoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dto\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="Model\CategoryViewModel.cs" />
   </ItemGroup>
