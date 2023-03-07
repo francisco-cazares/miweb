@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using miweb.Domain.Dto;
 using miweb.Service;
 
 namespace miweb.WebApi.Controllers
@@ -28,6 +29,20 @@ namespace miweb.WebApi.Controllers
             }
 
 
+        }
+        [HttpPost]
+
+        public ActionResult CreateEnvio(EnvioDto envioDto)
+        {
+            try
+            {
+                var result = _EnvioService.Create(envioDto);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

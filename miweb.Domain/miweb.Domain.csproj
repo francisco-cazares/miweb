@@ -45,6 +45,8 @@
     <Compile Include="Dto\CarroDto.cs" />
     <Compile Include="Dto\CategoriaDto.cs" />
     <Compile Include="Dto\ClienteDto.cs" />
+    <Compile Include="Dto\EnvioDto.cs" />
+    <Compile Include="Dto\PagoDto.cs" />
     <Compile Include="Dto\PaisDto.cs" />
     <Compile Include="Model\CarroViewModel.cs" />
     <Compile Include="Model\Carro_ProductoViewModel.cs" />
