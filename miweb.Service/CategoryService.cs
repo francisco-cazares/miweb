@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using miweb.Domain.Dto;
 using miweb.Domain.Model;
 using miweb.Persistence.dataBase;
+
 
 namespace miweb.Service
 {
@@ -27,10 +30,46 @@ namespace miweb.Service
                 return lista;
             }
         }
+        public Categoria Create (CategoriaDto categoriaDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Categoria categoria = context.Categoria.FirstOrDefault
+                     (cat => cat.Nombre.ToUpper().Trim() == categoriaDto.Nombre.ToUpper().Trim());
+
+                if (categoria?.Activo == true)
+                {
+                    throw new Exception($"Ya existe Categoria");
+                }
+                else if (categoria?.Activo == false)
+                {
+                    categoria.Activo = true;
+
+                    context.Entry(categoria).State = EntityState.Modified;
+                    context.SaveChanges();
+                    return categoria;
+                }
+                else
+                {
+                    var newcategoria = new Categoria();
+                    {
+                        newcategoria.Nombre = categoriaDto.Nombre;
+                        newcategoria.Imagen = categoriaDto.Imagen;
+                        newcategoria.Descripcion = categoriaDto.Descripcion;
+                        newcategoria.Activo = true;
+                    };
+                    context.Categoria.Add(newcategoria);
+                    context.SaveChanges();
+                    return newcategoria;
+
+                }
+            }
+        }
     }
     public interface ICategoryService
     {
         List<CategoryViewModel> GetListCategory();
+        Categoria Create (CategoriaDto categoriaDto);
     }
 }
 

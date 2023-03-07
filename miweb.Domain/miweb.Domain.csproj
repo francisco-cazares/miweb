@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Dto\CarroDto.cs" />
+    <Compile Include="Dto\CategoriaDto.cs" />
     <Compile Include="Dto\ClienteDto.cs" />
     <Compile Include="Dto\PaisDto.cs" />
     <Compile Include="Model\CarroViewModel.cs" />
