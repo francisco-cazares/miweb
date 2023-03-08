@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using miweb.Domain.Dto;
 using miweb.Service;
 
 
@@ -30,6 +31,19 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
-      }
-    }
+        [HttpPost]
 
+        public ActionResult CreateDireccion(DireccionDto direccionDto)
+        {
+            try 
+            {
+                var result = _DireccionService.Create(direccionDto);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+}

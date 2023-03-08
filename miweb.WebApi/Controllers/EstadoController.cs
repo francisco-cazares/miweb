@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using miweb.Domain.Dto;
 using miweb.Service;
 
 namespace miweb.WebApi.Controllers
@@ -22,6 +23,20 @@ namespace miweb.WebApi.Controllers
             {
                 var result = _EstadoService.GetListEstado();
                 return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+
+        public ActionResult CreateEstado(EstadoDto estadoDto)
+        {
+            try
+            {
+                var result = _EstadoService.Create(estadoDto);  
+                return Json(result);
             }
             catch (Exception ex)
             {

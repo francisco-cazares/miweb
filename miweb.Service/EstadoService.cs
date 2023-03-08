@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using miweb.Domain.Dto;
 using miweb.Domain.Model;
 using miweb.Persistence.dataBase;
 
@@ -26,9 +28,44 @@ namespace miweb.Service
                 return lista;
             }
         }
+        public Estado Create(EstadoDto estadoDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Estado estado = context.Estado.FirstOrDefault
+                    (env => env.Nombre.ToUpper().Trim() == estadoDto.Nombre.ToUpper().Trim());
+                {
+                    if (estado?.Activo == true)
+                    {
+                        throw new Exception($"Estado ya existe");
+                    }
+                    else if (estado?.Activo == false)
+                    {
+                        estado.Activo = true;
+
+                        context.Entry(estado).State = EntityState.Modified;
+                        context.SaveChanges();
+                        return (estado);
+                    }
+                    else
+                    {
+                        var newestado = new Estado();
+                        {
+                            newestado.Nombre = estadoDto.Nombre;
+                            newestado.PaisID = estadoDto.PaisID;
+                            newestado.Activo = estadoDto.Activo;
+                        };
+                        context.Estado.Add(newestado);
+                        context.SaveChanges();
+                        return newestado;
+                    }
+                }
+            }
+        }
     }
     public interface IEstadoService
     {
         List<EstadoViewModel> GetListEstado();
+        Estado Create(EstadoDto estadoDto);
     }
 }
