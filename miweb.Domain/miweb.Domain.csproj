@@ -50,6 +50,7 @@
     <Compile Include="Dto\EstadoDto.cs" />
     <Compile Include="Dto\PagoDto.cs" />
     <Compile Include="Dto\PaisDto.cs" />
+    <Compile Include="Dto\ProductoDto.cs" />
     <Compile Include="Model\CarroViewModel.cs" />
     <Compile Include="Model\Carro_ProductoViewModel.cs" />
     <Compile Include="Model\Cliente_DireccionViewModel.cs" />
