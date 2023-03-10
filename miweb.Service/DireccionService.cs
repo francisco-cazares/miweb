@@ -63,7 +63,7 @@ namespace miweb.Service
                             newdireccion.EstadoId = direccionDto.EstadoId;
                             newdireccion.entre_calles = direccionDto.entre_calles;
                             newdireccion.referencias = direccionDto.referencias;
-                            newdireccion.Activo = direccionDto.Activo;
+                            newdireccion.Activo = true;
                         };
                         context.Direccion.Add(newdireccion);
                         context.SaveChanges();

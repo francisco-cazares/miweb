@@ -56,7 +56,7 @@ namespace miweb.Service
                             neworden.PagoId = ordenDto.PagoId;
                             neworden.EnvId = ordenDto.EnvId;
                             neworden.total = ordenDto.total;
-                            neworden.Activo = ordenDto.Activo;
+                            neworden.Activo = true;
                         };
                         context.Orden.Add(neworden);
                         context.SaveChanges();

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using miweb.Domain.Dto;
 using miweb.Domain.Model;
 using miweb.Persistence.dataBase;
 
@@ -29,9 +31,44 @@ namespace miweb.Service
 
             }
         }
+        public Orden_Producto Create(Orden_ProductoDto orden_productoDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Orden_Producto orden_producto = context.Orden_Producto.FirstOrDefault(op => op.OrdId == orden_productoDto.OrdId);
+                {
+                    if (orden_producto?.Activo == true)
+                    {
+                        throw new Exception($"orden ya relacionada a producto");
+                    }
+                    else if (orden_producto?.Activo == false)
+                    {
+                        context.Entry(orden_producto).State = EntityState.Modified;
+                        context.SaveChanges();
+                        return orden_producto;
+
+                    }
+                    else
+                    {
+                        var neworde_producto = new Orden_Producto();
+                        {
+                            neworde_producto.OrdId = orden_productoDto.OrdId;
+                            neworde_producto.Proid = orden_productoDto.Proid;
+                            neworde_producto.cantidad = orden_productoDto.cantidad;
+                            neworde_producto.precio = orden_productoDto.precio;
+                            neworde_producto.Activo = true;
+                        };
+                        context.Orden_Producto.Add(neworde_producto);
+                        context.SaveChanges();
+                        return neworde_producto;
+                    }
+                }
+            }
+        }
     }
     public interface IOrden_ProductoService
     {
         List<Orden_ProductoViewModel> GetListOrden_Producto();
+        Orden_Producto Create(Orden_ProductoDto orden_productoDto);
     }
 }

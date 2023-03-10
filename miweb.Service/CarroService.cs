@@ -61,7 +61,7 @@ namespace miweb.Service
                             newcarro.PagoId = carroDto.PagoId;
                             newcarro.EnvId = carroDto.EnvId;
                             newcarro.Total = carroDto.Total;
-                            newcarro.Activo = carroDto.Activo;
+                            newcarro.Activo = true;
                         }
                         context.Carro.Add(newcarro);
                         context.SaveChanges();

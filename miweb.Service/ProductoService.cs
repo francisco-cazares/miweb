@@ -65,7 +65,7 @@ namespace miweb.Service
                             newproducto.imagen = productoDto.imagen;
                             newproducto.precio = productoDto.precio;
                             newproducto.CatId = productoDto.CatId;
-                            newproducto.Activo = productoDto.Activo;
+                            newproducto.Activo = true;
                         }
 
                         context.Producto.Add(newproducto);

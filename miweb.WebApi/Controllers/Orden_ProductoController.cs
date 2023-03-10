@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using miweb.Domain.Dto;
 using miweb.Service;
 
 namespace miweb.WebApi.Controllers
@@ -23,6 +24,19 @@ namespace miweb.WebApi.Controllers
             {
                 var result = _Orden_ProductoService.GetListOrden_Producto();
                 return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult CreateOrden_Producto (Orden_ProductoDto orden_productoDto)
+        {
+            try
+            {
+                var result = _Orden_ProductoService.Create(orden_productoDto);
+                return Json(result);
             }
             catch (Exception ex)
             {
