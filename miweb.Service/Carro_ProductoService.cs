@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using miweb.Domain.Dto;
 using miweb.Domain.Model;
 using miweb.Persistence.dataBase;
 
@@ -28,9 +30,46 @@ namespace miweb.Service
                 return lista;
             }
         }
+        public Carro_Producto Create (Carro_ProductoDto carro_productoDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Carro_Producto carro_producto = context.Carro_Producto.FirstOrDefault
+                    (cp => cp.CarroId == carro_productoDto.CarroId);
+                {
+                    if (carro_producto?.Activo == true)
+                    {
+                        throw new Exception($"este carro ya esta registrado");
+                    }
+                    else if (carro_producto?.Activo == false)
+                    {
+                        context.Entry(carro_productoDto).State = EntityState.Modified;
+                        context.SaveChanges();
+                        return carro_producto;
+                    }
+                    else
+                    {
+                        var newcarro_producto = new Carro_Producto();
+                        {
+                            newcarro_producto.CarroId = carro_productoDto.CarroId;
+                            newcarro_producto.Proid = carro_productoDto.Proid;
+                            newcarro_producto.cantidad = carro_productoDto.cantidad;
+                            newcarro_producto.precio = carro_productoDto.precio;
+                            newcarro_producto.Activo = true;
+                        };
+                        context.Carro_Producto.Add(newcarro_producto);
+                        context.SaveChanges();
+                        return newcarro_producto;
+                    }
+
+                }
+            }
+        }
     }
     public interface ICarro_ProductoService
     {
         List<Carro_ProductoViewModel> GetListCarro_Producto();
+
+        Carro_Producto Create(Carro_ProductoDto carro_productoDto);
     }
 }

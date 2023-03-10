@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace miweb.Domain.Dto
 {
-    public class CarroDto
+    public class OrdenDto
     {
-        public int CliId { get; set; }
+        public int? ClienteId { get; set; }
         public int? DirId { get; set; }
         public int? PagoId { get; set; }
         public int? EnvId { get; set; }
-        public decimal? Total { get; set; }
+        public decimal? total { get; set; }
         public bool? Activo { get; set; }
+
     }
 }

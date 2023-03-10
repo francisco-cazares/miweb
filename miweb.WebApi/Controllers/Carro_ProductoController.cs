@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using miweb.Domain.Dto;
 using miweb.Service;
 
 namespace miweb.WebApi.Controllers
@@ -22,6 +23,20 @@ namespace miweb.WebApi.Controllers
             {
                 var result = _Carro_ProductoService.GetListCarro_Producto();
                 return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+
+        public ActionResult CreateCarro_Producto(Carro_ProductoDto carro_productoDto)
+        {
+            try
+            {
+                var result = _Carro_ProductoService.Create(carro_productoDto);
+                return Json(result);
             }
             catch (Exception ex)
             {

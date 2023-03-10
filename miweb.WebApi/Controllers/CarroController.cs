@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using miweb.Domain.Dto;
 using miweb.Service;
 
 namespace miweb.WebApi.Controllers
@@ -25,6 +26,20 @@ namespace miweb.WebApi.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
 
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        
+        public ActionResult CreateCarro(CarroDto carroDto)
+        {
+            try
+            {
+                var result = _CarroService.Create(carroDto);
+                return Json(result);
+            }
             catch (Exception ex)
             {
                 throw ex;
