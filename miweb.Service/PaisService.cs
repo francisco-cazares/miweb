@@ -50,7 +50,7 @@ namespace miweb.Service
                     var newPais = new Pais()
                     {
                         Nombre = paisDto.Nombre,
-                        Activo = true;
+                        Activo = true
                     };
                     context.Pais.Add(newPais);
                     context.SaveChanges();

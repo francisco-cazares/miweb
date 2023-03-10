@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using miweb.Domain.Dto;
 using miweb.Service;
 
 namespace miweb.WebApi.Controllers
@@ -23,6 +24,20 @@ namespace miweb.WebApi.Controllers
             {
                 var result = _Cliente_DireccionService.GetListCliente_Direccion();
                 return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+
+        public ActionResult CreateCliente_Direccion(Cliente_DireccionDto cliente_DireccionDto)
+        {
+            try
+            {
+                var result = _Cliente_DireccionService.Create(cliente_DireccionDto);
+                return Json(result);
             }
             catch (Exception ex)
             {

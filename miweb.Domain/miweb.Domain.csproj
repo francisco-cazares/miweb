@@ -46,6 +46,7 @@
     <Compile Include="Dto\Carro_ProductoDto.cs" />
     <Compile Include="Dto\CategoriaDto.cs" />
     <Compile Include="Dto\ClienteDto.cs" />
+    <Compile Include="Dto\Cliente_DireccionDto.cs" />
     <Compile Include="Dto\DireccionDto.cs" />
     <Compile Include="Dto\EnvioDto.cs" />
     <Compile Include="Dto\EstadoDto.cs" />

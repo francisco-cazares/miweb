@@ -53,7 +53,7 @@ namespace miweb.Service
                         {
                             newestado.Nombre = estadoDto.Nombre;
                             newestado.PaisID = estadoDto.PaisID;
-                            newestado.Activo = estadoDto.Activo;
+                            newestado.Activo = true;
                         };
                         context.Estado.Add(newestado);
                         context.SaveChanges();
