@@ -44,6 +44,19 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
+        [HttpPut]
+        public ActionResult UpdatePago(PagoDto pagoDto)
+        {
+            try
+            {
+                _PagoService.Update(pagoDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
   

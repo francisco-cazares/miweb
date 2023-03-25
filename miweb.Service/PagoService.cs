@@ -7,33 +7,34 @@ using System.Threading.Tasks;
 using miweb.Domain.Dto;
 using miweb.Domain.Model;
 using miweb.Persistence.dataBase;
+using static miweb.Service.PagoService;
 
 namespace miweb.Service
 {
-        public class PagoService : IPagoService
-        {
+    public class PagoService : IPagoService
+    {
         public List<PagoViewModel> GetListPago()
         {
             using (var context = new ecommerceEntities1())
             {
                 List<PagoViewModel> lista = (from _pag in context.Pago
-                                                 where _pag.Activo == true
-                                                 select new PagoViewModel
-                                                 {
-                                                     PagoId = _pag.PagoId,
-                                                     Nombre = _pag.Nombre,
-                                                     Imagen = _pag.Imagen,
-                                                     Activo = _pag.Activo
-                                                 }).ToList();
+                                             where _pag.Activo == true
+                                             select new PagoViewModel
+                                             {
+                                                 PagoId = _pag.PagoId,
+                                                 Nombre = _pag.Nombre,
+                                                 Imagen = _pag.Imagen,
+                                                 Activo = _pag.Activo
+                                             }).ToList();
                 return lista;
 
             }
         }
-        public Pago Create (PagoDto pagoDto)
+        public Pago Create(PagoDto pagoDto)
         {
             using (var context = new ecommerceEntities1())
             {
-                Pago pago = context.Pago.FirstOrDefault 
+                Pago pago = context.Pago.FirstOrDefault
                     (pag => pag.Nombre.ToUpper().Trim() == pagoDto.Nombre.ToUpper().Trim());
                 {
                     if (pago?.Activo == true)
@@ -63,10 +64,40 @@ namespace miweb.Service
                 }
             }
         }
+        public void Update(PagoDto pagoDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Pago actualizar = context.Pago.FirstOrDefault
+                   (p => p.Nombre.ToUpper().Trim() == pagoDto.Nombre.ToUpper().Trim());
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Pago no se encuentra registrado");
+                    }
+                    else
+                    {
+                        actualizar.Nombre = pagoDto.Nombre;
+                        actualizar.Imagen = pagoDto.Imagen;
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+                }
+            }
+        }
     }
+
+
     public interface IPagoService
     {
         List<PagoViewModel> GetListPago();
         Pago Create(PagoDto pagoDto);
+        void Update(PagoDto pagoDto);
     }
+
+   
 }
