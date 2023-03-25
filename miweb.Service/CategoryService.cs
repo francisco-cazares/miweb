@@ -65,11 +65,42 @@ namespace miweb.Service
                 }   
             }
         }
+
+        public void Update(CategoriaDto categoriaDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Categoria actualizar = context.Categoria.FirstOrDefault
+                    (cat => cat.Nombre.ToUpper().Trim() == categoriaDto.Nombre.ToUpper().Trim());
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Categoria no se encuentra registrado");
+                    }
+                    else
+                    {
+                        actualizar.Nombre = categoriaDto.Nombre;
+                        actualizar.Imagen = categoriaDto.Imagen;
+                        actualizar.Descripcion = categoriaDto.Descripcion;
+                        actualizar.Activo =true;
+                      
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
     }
     public interface ICategoryService
     {
         List<CategoryViewModel> GetListCategory();
         Categoria Create (CategoriaDto categoriaDto);
+
+        void Update(CategoriaDto categoriaDto);
     }
 }
 

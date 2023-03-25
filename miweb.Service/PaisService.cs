@@ -58,12 +58,36 @@ namespace miweb.Service
                 }
 
             }
+
+        }
+        public void Update (PaisDto paisDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                var actualizarPais = context.Pais.FirstOrDefault(p => p.Nombre.ToUpper().Trim() == paisDto.Nombre.ToUpper().Trim());
+                {
+                    if (actualizarPais == null)
+                    {
+                        throw new Exception($"No existe el registro");
+                    }
+                    else
+                    {   
+                        actualizarPais.Nombre = paisDto.Nombre;
+                        actualizarPais.Activo = paisDto.Activo;
+
+                        context.Entry(actualizarPais).State = EntityState.Modified;
+                        context.SaveChanges();
+                    }
+               
+                }   
+            }
         }
     }
     public interface IPaisService
     {
         List<PaisViewModel> GetListPais();
         Pais Create(PaisDto paisDto);
+        void Update(PaisDto paisDto);
 
     }
 }

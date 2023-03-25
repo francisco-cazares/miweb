@@ -42,5 +42,18 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
+        [HttpPut]
+        public ActionResult UpdateCategoria(CategoriaDto categoriaDto)
+        {
+            try
+            {
+                _CategoryService.Update(categoriaDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

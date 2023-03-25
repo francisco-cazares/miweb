@@ -43,6 +43,19 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
+        [HttpPut]
+        public ActionResult UpdatePais(PaisDto paisDto)
+        {
+            try
+            {
+                _PaisService.Update(paisDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

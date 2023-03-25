@@ -15,21 +15,22 @@ namespace miweb.Service
     {
         public List<ClientViewModel> GetListClient()
         {
-    
+
             using (var context = new ecommerceEntities1())
             {
 
-               List<ClientViewModel> lista = (from _cli in context.Cliente where _cli.Activo == true
-                         select new ClientViewModel
-                         {
-                             ClienteId = _cli.ClienteId,
-                             Nombre = _cli.Nombre,
-                             Contrasena = _cli.Contrasena,
-                             Email = _cli.Email,
-                             Rol = _cli.Rol,
-                             Telefono = _cli.Telefono,
-                             Activo = _cli.Activo
-                         }).ToList();
+                List<ClientViewModel> lista = (from _cli in context.Cliente
+                                               where _cli.Activo == true
+                                               select new ClientViewModel
+                                               {
+                                                   ClienteId = _cli.ClienteId,
+                                                   Nombre = _cli.Nombre,
+                                                   Contrasena = _cli.Contrasena,
+                                                   Email = _cli.Email,
+                                                   Rol = _cli.Rol,
+                                                   Telefono = _cli.Telefono,
+                                                   Activo = _cli.Activo
+                                               }).ToList();
 
                 return lista;
             }
@@ -62,11 +63,42 @@ namespace miweb.Service
                         newcliente.Telefono = clienteDto.Telefono;
                         newcliente.Contrasena = clienteDto.Contrasena;
                         newcliente.Rol = clienteDto.Rol;
-                        newcliente.Activo =true;
+                        newcliente.Activo = true;
                     };
                     context.Cliente.Add(newcliente);
                     context.SaveChanges();
                     return newcliente;
+                }
+            }
+
+        }
+        public void Update(ClienteDto clienteDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Cliente actualizar = context.Cliente.FirstOrDefault
+                    (c => c.Email.ToUpper().Trim() == clienteDto.Email.ToUpper().Trim() && c.Activo == true);
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Cliente no se encuentra registrado");
+                    }
+                    else
+                    {
+                        actualizar.ClienteId = actualizar.ClienteId;
+                        actualizar.Email = actualizar.Email;
+                        actualizar.Nombre = clienteDto.Nombre;
+                        actualizar.Telefono = clienteDto.Telefono;
+                        actualizar.Contrasena = clienteDto.Contrasena;
+                        actualizar.Rol = clienteDto.Rol;
+                        actualizar.Activo = true;
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
                 }
             }
         }
@@ -76,5 +108,6 @@ namespace miweb.Service
     {
         List<ClientViewModel> GetListClient();
         Cliente Create(ClienteDto clienteDto);
+        void Update(ClienteDto clienteDto);
     }
 }

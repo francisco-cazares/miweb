@@ -20,7 +20,7 @@ namespace miweb.WebApi.Controllers
             {
                 var result = _clientService.GetListClient();
 
-                return Json(result,JsonRequestBehavior.AllowGet);
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -36,6 +36,20 @@ namespace miweb.WebApi.Controllers
                 return Json(result);
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPut]
+        public ActionResult UpdateCliente(ClienteDto clienteDto)
+        {
+            try
+            {
+                _clientService.Update(clienteDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)    
             {
                 throw ex;
             }
