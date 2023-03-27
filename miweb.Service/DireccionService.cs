@@ -73,11 +73,44 @@ namespace miweb.Service
             }
            
         }
+        public void Update (DireccionDto direccionDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Direccion actualizar = context.Direccion.FirstOrDefault
+                        (dir => dir.calle.ToUpper().Trim() == direccionDto.calle.ToUpper().Trim() && dir.numero == direccionDto.numero);
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"direccion no se encuentra registrada");
+                    }
+                    else
+                    {
+                        actualizar.calle = direccionDto.calle;
+                        actualizar.numero = direccionDto.numero;
+                        actualizar.colonia = direccionDto.colonia;
+                        actualizar.cp = direccionDto.cp;
+                        actualizar.EstadoId = direccionDto.EstadoId;
+                        actualizar.entre_calles = direccionDto.entre_calles;
+                        actualizar.referencias = direccionDto.referencias;
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
 
     }
     public interface IDireccionService
     {
         List<DireccionViewModel> GetListDireccion();
         Direccion Create(DireccionDto direccionDto);
+        void Update(DireccionDto direccionDto);
     }
 }
