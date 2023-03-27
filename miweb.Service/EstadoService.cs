@@ -62,10 +62,40 @@ namespace miweb.Service
                 }
             }
         }
+        public void Update(EstadoDto estadoDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Estado actualizar = context.Estado.FirstOrDefault
+                        (est => est.Nombre.ToUpper().Trim() == estadoDto.Nombre.ToUpper().Trim());
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Estado no se encuentra registrado");
+                    }
+                    else
+                    {
+                        actualizar.Nombre = estadoDto.Nombre;
+                        actualizar.PaisID = estadoDto.PaisID;
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
     }
+ 
     public interface IEstadoService
     {
         List<EstadoViewModel> GetListEstado();
         Estado Create(EstadoDto estadoDto);
+
+        void Update(EstadoDto estadoDto);
     }
 }

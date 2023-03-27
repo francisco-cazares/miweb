@@ -17,19 +17,19 @@ namespace miweb.Service
             using (var context = new ecommerceEntities1())
             {
                 List<EnvioViewModel> lista = (from _Env in context.Envio
-                                             where _Env.Activo == true
-                                             select new EnvioViewModel
-                                             {
-                                                 EnvId = _Env.EnvId,
-                                                 Nombre = _Env.Nombre,
-                                                 Imagen = _Env.Imagen,
-                                                 Costo = _Env.Costo,
-                                                 Activo = _Env.Activo
-                                             }).ToList();
+                                              where _Env.Activo == true
+                                              select new EnvioViewModel
+                                              {
+                                                  EnvId = _Env.EnvId,
+                                                  Nombre = _Env.Nombre,
+                                                  Imagen = _Env.Imagen,
+                                                  Costo = _Env.Costo,
+                                                  Activo = _Env.Activo
+                                              }).ToList();
                 return lista;
             }
         }
-        public Envio Create (EnvioDto envioDto)
+        public Envio Create(EnvioDto envioDto)
         {
             using (var context = new ecommerceEntities1())
             {
@@ -62,11 +62,45 @@ namespace miweb.Service
                     }
                 }
             }
+
+        }
+        public void Update(EnvioDto envioDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Envio actualizar = context.Envio.FirstOrDefault
+                    (e => e.Nombre.ToUpper().Trim() == envioDto.Nombre.ToUpper().Trim());
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Envio no se encuentra registrado");
+                    }
+                    else
+                    {
+                        actualizar.Nombre = envioDto.Nombre;
+                        actualizar.Imagen = envioDto.Imagen;
+                        actualizar.Costo = envioDto.Costo;
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+                }
+            }
         }
     }
-    public interface IEnvioService
-    {
-        List<EnvioViewModel> GetListEnvio();
-        Envio Create (EnvioDto envioDto);
-    }
+
+        public interface IEnvioService
+        {
+            List<EnvioViewModel> GetListEnvio();
+            Envio Create(EnvioDto envioDto);
+
+         void Update(EnvioDto envioDto);
+
+
+        }
+    
 }

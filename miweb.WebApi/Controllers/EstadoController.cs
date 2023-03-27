@@ -43,6 +43,19 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
+        [HttpPut]
+        public ActionResult UpdateEstado(EstadoDto estadoDto)
+        {
+            try
+            {
+                _EstadoService.Update(estadoDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 
