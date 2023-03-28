@@ -65,10 +65,41 @@ namespace miweb.Service
                 }
             }
         }
+        public void Update(OrdenDto ordenDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Orden actualizar = context.Orden.FirstOrDefault
+                    (O => O.EnvId == ordenDto.EnvId && O.PagoId == ordenDto.PagoId);
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Orden no Existe");
+                    }
+                    else
+                    {
+                        actualizar.ClienteId = ordenDto.ClienteId;
+                        actualizar.DirId = ordenDto.DirId;
+                        actualizar.PagoId = ordenDto.PagoId;
+                        actualizar.EnvId = ordenDto.EnvId;
+                        actualizar.total = ordenDto.total;
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
     }
     public interface IOrdenService
     {
         List<OrdenViewModel> GetListOrden();
         Orden Create(OrdenDto ordenDto);
+        void Update(OrdenDto ordenDto);
     }
 }
