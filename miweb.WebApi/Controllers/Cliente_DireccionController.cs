@@ -44,6 +44,19 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
+        [HttpPut]
+        public ActionResult UpdateCliente_Direccion(Cliente_DireccionDto cliente_direccionDto)
+        {
+            try
+            {
+                _Cliente_DireccionService.Update(cliente_direccionDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 

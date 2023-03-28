@@ -61,11 +61,41 @@ namespace miweb.Service
                 }
             }
         }
+        public void Update (Cliente_DireccionDto cliente_direccionDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Cliente_Direccion actualizar = context.Cliente_Direccion.FirstOrDefault
+                    (CD => CD.CDid == cliente_direccionDto.CDid && CD.CliId == cliente_direccionDto.CliId);
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Cliente y Direccion no se encuentran registradas");
+                    }
+                    else
+                    {
+                        actualizar.CDid = cliente_direccionDto.CDid;
+                        actualizar.CliId = cliente_direccionDto.CliId;
+                        actualizar.DirId = cliente_direccionDto.DirId;
+                       
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
     }
     public interface ICliente_DireccionService
     {
         List<Cliente_DireccionViewModel> GetListCliente_Direccion();
 
         Cliente_Direccion Create(Cliente_DireccionDto cliente_direccionDto);
+        void Update(Cliente_DireccionDto cliente_direccionDto);
     }
 }

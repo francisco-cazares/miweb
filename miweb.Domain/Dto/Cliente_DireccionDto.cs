@@ -8,6 +8,7 @@ namespace miweb.Domain.Dto
 {
     public class Cliente_DireccionDto
     {
+        public int CDid { get; set; }
         public int? CliId { get; set; }
         public int? DirId { get; set; }
         public bool? Activo { get; set; }
