@@ -45,6 +45,19 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
+        [HttpPut]
+        public ActionResult UpdateCarro(CarroDto carroDto)
+        {
+            try
+            {
+                _CarroService.Update(carroDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 

@@ -75,10 +75,43 @@ namespace miweb.Service
                 }
             }
         }
+        public void Update (ProductoDto productoDto)
+        {
+            using ( var context = new ecommerceEntities1())
+            {
+                Producto actualizar = context.Producto.FirstOrDefault
+                    (pro => pro.sku.ToUpper().Trim() == productoDto.sku.ToUpper().Trim());
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Producto no se encuentra registrado");
+                    }
+                    else
+                    {
+                        actualizar.nombre = productoDto.nombre;
+                        actualizar.marca = productoDto.marca;
+                        actualizar.sku = productoDto.sku;
+                        actualizar.descripcion = productoDto.descripcion;
+                        actualizar.imagen = productoDto.imagen;
+                        actualizar.precio = productoDto.precio;
+                        actualizar.CatId = productoDto.CatId;
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
     }
     public interface IProductoService
     {
         List<ProductoViewModel> GetListProducto();
         Producto Create(ProductoDto productoDto);
+        void Update(ProductoDto productoDto);
     }
 }

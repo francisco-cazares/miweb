@@ -73,7 +73,37 @@ namespace miweb.Service
 
 
         }
+        public void Update(CarroDto carroDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Carro actualizar = context.Carro.FirstOrDefault
+                   (c => c.CliId == carroDto.CliId && c.PagoId == carroDto.PagoId);
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Producto no se encuentra registrado");
+                    }
+                    else
+                    {
+                        actualizar.CliId = carroDto.CliId;
+                        actualizar.DirId = carroDto.DirId;
+                        actualizar.PagoId = carroDto.PagoId;
+                        actualizar.EnvId = carroDto.EnvId;
+                        actualizar.Total = carroDto.Total;
 
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
     }
 
     public interface ICarroService
@@ -82,5 +112,6 @@ namespace miweb.Service
 
         Carro Create(CarroDto carroDto);
 
+        void Update(CarroDto carroDto);
     }
 }

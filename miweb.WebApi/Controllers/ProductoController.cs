@@ -42,6 +42,19 @@ namespace miweb.WebApi.Controllers
                 throw ex;
             }
         }
+        [HttpPut]
+        public ActionResult UpdateProducto(ProductoDto productoDto)
+        {
+            try
+            {
+                _ProductoService.Update(productoDto);
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }
