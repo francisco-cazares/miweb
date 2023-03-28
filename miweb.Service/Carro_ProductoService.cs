@@ -65,11 +65,41 @@ namespace miweb.Service
                 }
             }
         }
+        public void Update(Carro_ProductoDto carro_productoDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Carro_Producto actualizar = context.Carro_Producto.FirstOrDefault
+                    (CP => CP.CarroId == carro_productoDto.CarroId && CP.Proid == carro_productoDto.Proid);
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Carro o Producto invalido");
+                    }
+                    else
+                    {
+                        actualizar.CarroId = carro_productoDto.CarroId;
+                        actualizar.Proid = carro_productoDto.Proid;
+                        actualizar.cantidad = carro_productoDto.cantidad;
+                        actualizar.precio = carro_productoDto.precio;
+                        actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+
+
+                }
+            }
+        }
     }
     public interface ICarro_ProductoService
     {
         List<Carro_ProductoViewModel> GetListCarro_Producto();
 
         Carro_Producto Create(Carro_ProductoDto carro_productoDto);
+        void Update(Carro_ProductoDto carro_productoDto);
     }
 }

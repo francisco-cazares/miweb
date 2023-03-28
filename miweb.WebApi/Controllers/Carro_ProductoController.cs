@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -37,6 +37,19 @@ namespace miweb.WebApi.Controllers
             {
                 var result = _Carro_ProductoService.Create(carro_productoDto);
                 return Json(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPut]
+        public ActionResult UpdateCarro_Producto(Carro_ProductoDto carro_productoDto)
+        {
+            try
+            {
+                _Carro_ProductoService.Update(carro_productoDto);
+                return Json("Ok");
             }
             catch (Exception ex)
             {

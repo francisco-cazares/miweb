@@ -65,10 +65,39 @@ namespace miweb.Service
                 }
             }
         }
+        public void Update(Orden_ProductoDto orden_productoDto)
+        {
+            using (var context = new ecommerceEntities1())
+            {
+                Orden_Producto actualizar = context.Orden_Producto.FirstOrDefault(OP => OP.OrdId == orden_productoDto.OrdId && OP.Proid == orden_productoDto.Proid);
+                {
+                    if (actualizar == null)
+                    {
+                        throw new Exception($"Orden o Producto invalidos");
+                    }
+                    else
+                    {
+                        actualizar.OrdId = orden_productoDto.OrdId;
+                        actualizar.Proid = orden_productoDto.Proid;
+                        actualizar.cantidad = orden_productoDto.cantidad;
+                        actualizar.precio = orden_productoDto.precio;
+                       
+                       actualizar.Activo = true;
+
+
+                        context.Entry(actualizar).State = EntityState.Modified;
+                        context.SaveChanges();
+
+                    }
+                }
+            }
+        }
     }
     public interface IOrden_ProductoService
     {
         List<Orden_ProductoViewModel> GetListOrden_Producto();
         Orden_Producto Create(Orden_ProductoDto orden_productoDto);
+
+        void Update(Orden_ProductoDto orden_ProductoDto);
     }
 }
